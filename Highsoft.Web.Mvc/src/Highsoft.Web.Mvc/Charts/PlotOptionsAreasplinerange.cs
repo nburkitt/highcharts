@@ -54,14 +54,14 @@ namespace Highsoft.Web.Mvc.Charts
             this.LineWidth = nullable3;
             this.Linecap = this.Linecap_DefaultValue = PlotOptionsAreasplinerangeLinecap.Round;
             this.LinkedTo = this.LinkedTo_DefaultValue = "";
-            this.NegativeColor = this.NegativeColor_DefaultValue = "null";
+			this.Marker = this.Marker_DefaultValue = new PlotOptionsAreasplinerangeMarker();
+			this.NegativeColor = this.NegativeColor_DefaultValue = "null";
             this.NegativeFillColor = this.NegativeFillColor_DefaultValue = (string) null;
             this.Point = this.Point_DefaultValue = new PlotOptionsAreasplinerangePoint();
             nullable3 = new double?(1.0);
             this.PointInterval_DefaultValue = nullable3;
             this.PointInterval = nullable3;
-            this.PointIntervalUnit =
-                this.PointIntervalUnit_DefaultValue = PlotOptionsAreasplinerangePointIntervalUnit.Null;
+            this.PointIntervalUnit = this.PointIntervalUnit_DefaultValue = PlotOptionsAreasplinerangePointIntervalUnit.Null;
             this.PointPlacement = this.PointPlacement_DefaultValue = new PointPlacement();
             nullable3 = new double?(0.0);
             this.PointStart_DefaultValue = nullable3;
@@ -80,7 +80,8 @@ namespace Highsoft.Web.Mvc.Charts
             this.ShowInLegend_DefaultValue = nullable1;
             this.ShowInLegend = nullable1;
             this.States = this.States_DefaultValue = new PlotOptionsAreasplinerangeStates();
-            nullable1 = new bool?(true);
+			this.Step = this.Step_DefaultValue = PlotOptionsAreasplinerangeStep.False;
+			nullable1 = new bool?(true);
             this.StickyTracking_DefaultValue = nullable1;
             this.StickyTracking = nullable1;
             this.Tooltip = this.Tooltip_DefaultValue = new PlotOptionsAreasplinerangeTooltip();
@@ -185,7 +186,11 @@ namespace Highsoft.Web.Mvc.Charts
 
         private string LinkedTo_DefaultValue { get; set; }
 
-        public string NegativeColor { get; set; }
+		public PlotOptionsAreasplinerangeMarker Marker { get; set; }
+
+		private PlotOptionsAreasplinerangeMarker Marker_DefaultValue { get; set; }
+
+		public string NegativeColor { get; set; }
 
         private string NegativeColor_DefaultValue { get; set; }
 
@@ -233,7 +238,11 @@ namespace Highsoft.Web.Mvc.Charts
 
         private PlotOptionsAreasplinerangeStates States_DefaultValue { get; set; }
 
-        public bool? StickyTracking { get; set; }
+		public PlotOptionsAreasplinerangeStep Step { get; set; }
+
+		private PlotOptionsAreasplinerangeStep Step_DefaultValue { get; set; }
+
+		public bool? StickyTracking { get; set; }
 
         private bool? StickyTracking_DefaultValue { get; set; }
 
@@ -336,7 +345,9 @@ namespace Highsoft.Web.Mvc.Charts
                 hashtable.Add((object) "linecap", (object) Highcharts.FirstCharacterToLower(this.Linecap.ToString()));
             if (this.LinkedTo != this.LinkedTo_DefaultValue)
                 hashtable.Add((object) "linkedTo", (object) this.LinkedTo);
-            if (this.NegativeColor != this.NegativeColor_DefaultValue)
+			if ( this.Marker.IsDirty() )
+				hashtable.Add( ( object ) "marker", ( object ) this.Marker.ToHashtable() );
+			if ( this.NegativeColor != this.NegativeColor_DefaultValue)
                 hashtable.Add((object) "negativeColor", (object) this.NegativeColor);
             if (this.NegativeFillColor != this.NegativeFillColor_DefaultValue)
                 hashtable.Add((object) "negativeFillColor", (object) this.NegativeFillColor);

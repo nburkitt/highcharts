@@ -133,7 +133,15 @@ namespace Highsoft.Web.Mvc.Charts.Rendering
                     arearangeSeries.Type = ArearangeSeriesType.Arearange;
                     hashtable = arearangeSeries.ToHashtable();
                 }
-                if (series is ColumnrangeSeries)
+				if ( series is AreasplinerangeSeries )
+				{
+					AreasplinerangeSeries areasplinerangeSeries = series as AreasplinerangeSeries;
+					areasplinerangeSeries.Data.ForEach(
+						( Action<AreasplinerangeSeriesData> ) ( data => dataList.Add( ( object ) data.ToHashtable() ) ) );
+					areasplinerangeSeries.Type = AreasplinerangeSeriesType.Areasplinerange;
+					hashtable = areasplinerangeSeries.ToHashtable();
+				}
+				if (series is ColumnrangeSeries)
                 {
                     ColumnrangeSeries columnrangeSeries = series as ColumnrangeSeries;
                     columnrangeSeries.Data.ForEach(

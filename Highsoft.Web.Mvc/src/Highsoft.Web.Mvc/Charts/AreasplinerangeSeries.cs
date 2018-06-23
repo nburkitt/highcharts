@@ -89,6 +89,7 @@ namespace Highsoft.Web.Mvc.Charts
             this.ShowInLegend_DefaultValue = nullable1;
             this.ShowInLegend = nullable1;
             this.States = this.States_DefaultValue = new AreasplinerangeSeriesStates();
+            this.Step = this.Step_DefaultValue = AreasplinerangeSeriesStep.False;
             nullable1 = new bool?(true);
             this.StickyTracking_DefaultValue = nullable1;
             this.StickyTracking = nullable1;
@@ -267,6 +268,10 @@ namespace Highsoft.Web.Mvc.Charts
         public AreasplinerangeSeriesStates States { get; set; }
 
         private AreasplinerangeSeriesStates States_DefaultValue { get; set; }
+
+        public AreasplinerangeSeriesStep Step { get; set; }
+
+        private AreasplinerangeSeriesStep Step_DefaultValue { get; set; }
 
         public bool? StickyTracking { get; set; }
 
@@ -449,6 +454,8 @@ namespace Highsoft.Web.Mvc.Charts
                 hashtable.Add((object) "showInLegend", (object) this.ShowInLegend);
             if (this.States.IsDirty())
                 hashtable.Add((object) "states", (object) this.States.ToHashtable());
+            if (this.Step != this.Step_DefaultValue)
+                hashtable.Add((object) "step", (object) Highcharts.FirstCharacterToLower(this.Step.ToString()));
             nullable2 = this.StickyTracking;
             nullable1 = this.StickyTracking_DefaultValue;
             if (nullable2.GetValueOrDefault() != nullable1.GetValueOrDefault() ||

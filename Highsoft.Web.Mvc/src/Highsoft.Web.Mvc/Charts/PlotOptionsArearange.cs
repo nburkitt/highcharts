@@ -54,7 +54,8 @@ namespace Highsoft.Web.Mvc.Charts
             this.LineWidth = nullable3;
             this.Linecap = this.Linecap_DefaultValue = PlotOptionsArearangeLinecap.Round;
             this.LinkedTo = this.LinkedTo_DefaultValue = "";
-            this.NegativeColor = this.NegativeColor_DefaultValue = "null";
+			this.Marker = this.Marker_DefaultValue = new PlotOptionsArearangeMarker();
+			this.NegativeColor = this.NegativeColor_DefaultValue = "null";
             this.NegativeFillColor = this.NegativeFillColor_DefaultValue = (string) null;
             this.Point = this.Point_DefaultValue = new PlotOptionsArearangePoint();
             nullable3 = new double?(1.0);
@@ -185,7 +186,11 @@ namespace Highsoft.Web.Mvc.Charts
 
         private string LinkedTo_DefaultValue { get; set; }
 
-        public string NegativeColor { get; set; }
+		public PlotOptionsArearangeMarker Marker { get; set; }
+
+		private PlotOptionsArearangeMarker Marker_DefaultValue { get; set; }
+
+		public string NegativeColor { get; set; }
 
         private string NegativeColor_DefaultValue { get; set; }
 
@@ -340,7 +345,9 @@ namespace Highsoft.Web.Mvc.Charts
                 hashtable.Add((object) "linecap", (object) Highcharts.FirstCharacterToLower(this.Linecap.ToString()));
             if (this.LinkedTo != this.LinkedTo_DefaultValue)
                 hashtable.Add((object) "linkedTo", (object) this.LinkedTo);
-            if (this.NegativeColor != this.NegativeColor_DefaultValue)
+			if ( this.Marker.IsDirty() )
+				hashtable.Add( ( object ) "marker", ( object ) this.Marker.ToHashtable() );
+			if ( this.NegativeColor != this.NegativeColor_DefaultValue)
                 hashtable.Add((object) "negativeColor", (object) this.NegativeColor);
             if (this.NegativeFillColor != this.NegativeFillColor_DefaultValue)
                 hashtable.Add((object) "negativeFillColor", (object) this.NegativeFillColor);
